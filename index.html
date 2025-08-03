@@ -16,64 +16,16 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
-        background: #000;
+        background-color: #000;
+        background-image: url('http://googleusercontent.com/image_generation_content/2');
+        background-size: cover;
+        background-position: center;
         color: #00ffc0;
         text-align: center;
         text-shadow: 0 0 5px #00ffc0, 0 0 10px #00ffc0;
-        animation: glitch-bg 10s infinite;
-      }
-
-      @keyframes glitch-bg {
-        0% { filter: hue-rotate(0deg); }
-        50% { filter: hue-rotate(360deg); }
-        100% { filter: hue-rotate(0deg); }
-      }
-
-      .login-container {
-        padding: 50px;
-        border: 2px solid #00ffc0;
-        box-shadow: 0 0 20px #00ffc0;
-        animation: scanline 5s infinite, glow 2s ease-in-out infinite alternate;
-        background: rgba(0, 0, 0, 0.7);
+        animation: scanline 5s infinite;
         position: relative;
         overflow: hidden;
-      }
-
-      .login-container::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background: linear-gradient(to right, transparent, #00ffc0, transparent);
-        animation: scan-top 3s linear infinite;
-      }
-
-      .login-container::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background: linear-gradient(to right, transparent, #00ffc0, transparent);
-        animation: scan-bottom 3s linear infinite;
-      }
-
-      @keyframes scan-top {
-        0% { transform: translateX(-100%); }
-        100% { transform: translateX(100%); }
-      }
-
-      @keyframes scan-bottom {
-        0% { transform: translateX(100%); }
-        100% { transform: translateX(-100%); }
-      }
-      
-      @keyframes glow {
-        from { box-shadow: 0 0 10px #00ffc0; }
-        to { box-shadow: 0 0 30px #00ffc0; }
       }
 
       @keyframes scanline {
@@ -81,36 +33,107 @@
         100% { background-position: 0 100%; }
       }
 
+      body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          rgba(0, 255, 192, 0.1),
+          rgba(0, 0, 0, 0.5) 50%,
+          rgba(243, 73, 148, 0.1)
+        );
+        pointer-events: none;
+      }
+
+      .login-container {
+        padding: 50px;
+        border: 2px solid #00ffc0;
+        box-shadow: 0 0 20px #00ffc0;
+        animation: glow 2s ease-in-out infinite alternate;
+        background: rgba(0, 0, 0, 0.8);
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
+        max-width: 500px;
+      }
+
+      @keyframes glow {
+        from { box-shadow: 0 0 10px #00ffc0, 0 0 20px #00ffc0 inset; }
+        to { box-shadow: 0 0 30px #00ffc0, 0 0 40px #00ffc0 inset; }
+      }
+
       h1 {
-        font-size: 2em;
-        margin-bottom: 10px;
+        font-size: 2.5em;
+        margin-bottom: 5px;
         color: #f34994;
         text-shadow: 0 0 5px #f34994, 0 0 10px #f34994;
       }
 
       p {
-        font-size: 0.8em;
+        font-size: 0.9em;
         margin-top: 0;
+        margin-bottom: 30px;
       }
 
-      button,
-      .netlify-identity-menu a {
-        background-color: transparent;
-        color: #00ffc0;
-        border: 2px solid #00ffc0;
-        padding: 10px 20px;
+      .login-button {
+        background-color: #f34994;
+        color: #000;
+        border: 2px solid #f34994;
+        padding: 15px 30px;
         cursor: pointer;
         font-family: 'Cyberpunk', monospace;
-        font-size: 1em;
-        text-shadow: 0 0 5px #00ffc0;
+        font-size: 1.2em;
+        text-shadow: 0 0 5px #000;
+        box-shadow: 0 0 15px #f34994;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .login-button::before {
+        content: '>>';
+        position: absolute;
+        left: -20px;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0;
         transition: all 0.3s ease;
       }
 
-      button:hover,
-      .netlify-identity-menu a:hover {
-        background-color: #00ffc0;
-        color: #000;
-        box-shadow: 0 0 15px #00ffc0;
+      .login-button:hover::before {
+        left: 10px;
+        opacity: 1;
+      }
+
+      .login-button::after {
+        content: '<<';
+        position: absolute;
+        right: -20px;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0;
+        transition: all 0.3s ease;
+      }
+
+      .login-button:hover::after {
+        right: 10px;
+        opacity: 1;
+      }
+
+      .login-button:hover {
+        background-color: #000;
+        color: #f34994;
+        box-shadow: 0 0 25px #f34994;
+      }
+      
+      .login-button:active {
+        transform: scale(0.95);
       }
     </style>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -118,8 +141,8 @@
   <body>
     <div class="login-container">
       <h1>TRADE WITH AROHI</h1>
-      <p>ACCESS PROTOCOL: REQUIRED</p>
-      <div data-netlify-identity-button></div>
+      <p>DATA STREAM INITIATED. AUTHORIZATION REQUIRED</p>
+      <div data-netlify-identity-button class="login-button">LOG IN</div>
     </div>
   </body>
   <script>
