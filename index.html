@@ -55,26 +55,32 @@
         clientId: "QbocdruzwnkjfHwVyrqHm4UT5SicsMnD",
         authorizationParams: {
           redirect_uri: window.location.origin
-        }
+        },
+        cacheLocation: "localstorage",
+        useRefreshTokens: true
       });
 
-      document.getElementById("login-btn").addEventListener("click", async () => {
-        await auth0Client.loginWithPopup();
+      async function handleAuth() {
+        const query = window.location.search;
+        if (query.includes("code=") && query.includes("state=")) {
+          // Process the login state
+          await auth0Client.handleRedirectCallback();
+          window.history.replaceState({}, document.title, "/");
+        }
+
         const isAuthenticated = await auth0Client.isAuthenticated();
         if (isAuthenticated) {
           document.getElementById("login-container").style.display = "none";
           document.getElementById("root").style.display = "block";
-          // Load your actual app
           import("/assets/index-lY6IPLm5.js");
         }
+      }
+
+      document.getElementById("login-btn").addEventListener("click", async () => {
+        await auth0Client.loginWithRedirect();
       });
 
-      // If already logged in (refresh case)
-      if (await auth0Client.isAuthenticated()) {
-        document.getElementById("login-container").style.display = "none";
-        document.getElementById("root").style.display = "block";
-        import("/assets/index-lY6IPLm5.js");
-      }
+      handleAuth();
     </script>
   </body>
 </html>
