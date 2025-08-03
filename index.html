@@ -3,21 +3,126 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login to Trade with Arohi</title>
+    <title>TRADE WITH AROHI - Login</title>
     <style>
-      /* Same CSS as before */
+      @font-face {
+        font-family: 'Cyberpunk';
+        src: url('https://fonts.gstatic.com/s/pressstart2p/v14/8LzP5b92uX5q_qCgYf35z_Hq.woff2') format('woff2');
+      }
+
+      body {
+        font-family: 'Cyberpunk', monospace;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #000;
+        color: #00ffc0;
+        text-align: center;
+        text-shadow: 0 0 5px #00ffc0, 0 0 10px #00ffc0;
+        animation: glitch-bg 10s infinite;
+      }
+
+      @keyframes glitch-bg {
+        0% { filter: hue-rotate(0deg); }
+        50% { filter: hue-rotate(360deg); }
+        100% { filter: hue-rotate(0deg); }
+      }
+
+      .login-container {
+        padding: 50px;
+        border: 2px solid #00ffc0;
+        box-shadow: 0 0 20px #00ffc0;
+        animation: scanline 5s infinite, glow 2s ease-in-out infinite alternate;
+        background: rgba(0, 0, 0, 0.7);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .login-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(to right, transparent, #00ffc0, transparent);
+        animation: scan-top 3s linear infinite;
+      }
+
+      .login-container::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(to right, transparent, #00ffc0, transparent);
+        animation: scan-bottom 3s linear infinite;
+      }
+
+      @keyframes scan-top {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+
+      @keyframes scan-bottom {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+      }
+      
+      @keyframes glow {
+        from { box-shadow: 0 0 10px #00ffc0; }
+        to { box-shadow: 0 0 30px #00ffc0; }
+      }
+
+      @keyframes scanline {
+        0% { background-position: 0 0; }
+        100% { background-position: 0 100%; }
+      }
+
+      h1 {
+        font-size: 2em;
+        margin-bottom: 10px;
+        color: #f34994;
+        text-shadow: 0 0 5px #f34994, 0 0 10px #f34994;
+      }
+
+      p {
+        font-size: 0.8em;
+        margin-top: 0;
+      }
+
+      button,
+      .netlify-identity-menu a {
+        background-color: transparent;
+        color: #00ffc0;
+        border: 2px solid #00ffc0;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-family: 'Cyberpunk', monospace;
+        font-size: 1em;
+        text-shadow: 0 0 5px #00ffc0;
+        transition: all 0.3s ease;
+      }
+
+      button:hover,
+      .netlify-identity-menu a:hover {
+        background-color: #00ffc0;
+        color: #000;
+        box-shadow: 0 0 15px #00ffc0;
+      }
     </style>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
     <div class="login-container">
-      <h1>Welcome to Trade with Arohi</h1>
-      <p>Please log in to access the trading signals.</p>
+      <h1>TRADE WITH AROHI</h1>
+      <p>ACCESS PROTOCOL: REQUIRED</p>
       <div data-netlify-identity-button></div>
     </div>
   </body>
   <script>
-    // This script will handle the redirection after login
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on('init', user => {
         if (user) {
