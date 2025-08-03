@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TRADE WITH AROHI - Login</title>
     <style>
+      /* --- Custom Cyberpunk Font --- */
       @font-face {
         font-family: 'Cyberpunk';
         src: url('https://fonts.gstatic.com/s/pressstart2p/v14/8LzP5b92uX5q_qCgYf35z_Hq.woff2') format('woff2');
       }
 
+      /* --- Base Body Styling & Background --- */
       body {
         font-family: 'Cyberpunk', monospace;
         display: flex;
@@ -20,12 +22,13 @@
         background-size: cover;
         background-position: center;
         background-color: #000;
-        color: #00ffc0;
         text-align: center;
-        text-shadow: 0 0 5px #00ffc0, 0 0 10px #00ffc0;
         position: relative;
+        overflow: hidden;
+        cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16"><path fill="%2300ffc0" d="M10.07 12.07l1.9-1.9L1.9 0 0 1.9l8.17 8.17-1.9 1.9L0 13.97l1.9 1.9L10.07 12.07z"/></svg>'), auto;
       }
 
+      /* --- Dark Overlay to make text readable --- */
       body::before {
         content: '';
         position: absolute;
@@ -33,105 +36,75 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.7); /* Adjust opacity here */
+        background-color: rgba(0, 0, 0, 0.85); /* Increased opacity for better contrast */
         pointer-events: none;
       }
 
+      /* --- Main Login Container --- */
       .login-container {
-        padding: 50px;
-        border: 2px solid #00ffc0;
-        box-shadow: 0 0 20px #00ffc0;
-        animation: glow 2s ease-in-out infinite alternate;
-        background: rgba(0, 0, 0, 0.8);
         position: relative;
         z-index: 1;
+        padding: 50px;
+        background: rgba(0, 0, 0, 0.7);
+        border: 2px solid #00ffc0; /* Adjusted to match text color */
+        box-shadow: 0 0 15px #00ffc0; /* Adjusted to match text color */
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 80%;
         max-width: 500px;
+        transition: all 0.4s ease-in-out;
       }
 
-      @keyframes glow {
-        from { box-shadow: 0 0 10px #00ffc0, 0 0 20px #00ffc0 inset; }
-        to { box-shadow: 0 0 30px #00ffc0, 0 0 40px #00ffc0 inset; }
-      }
-
+      /* --- Heading and paragraph styles --- */
       h1 {
         font-size: 2.5em;
         margin-bottom: 5px;
-        color: #f34994;
-        text-shadow: 0 0 5px #f34994, 0 0 10px #f34994;
+        color: #f34994; /* Adjusted to pink for better contrast */
+        text-shadow: 0 0 5px #f34994, 0 0 15px #f34994; /* Stronger text shadow */
+        letter-spacing: 2px;
       }
 
       p {
         font-size: 0.9em;
         margin-top: 0;
-        margin-bottom: 30px;
-      }
-
-      .login-button {
-        background-color: #f34994;
-        color: #000;
-        border: 2px solid #f34994;
-        padding: 15px 30px;
-        cursor: pointer;
-        font-family: 'Cyberpunk', monospace;
-        font-size: 1.2em;
-        text-shadow: 0 0 5px #000;
-        box-shadow: 0 0 15px #f34994;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .login-button::before {
-        content: '>>';
-        position: absolute;
-        left: -20px;
-        top: 50%;
-        transform: translateY(-50%);
-        opacity: 0;
-        transition: all 0.3s ease;
-      }
-
-      .login-button:hover::before {
-        left: 10px;
-        opacity: 1;
-      }
-
-      .login-button::after {
-        content: '<<';
-        position: absolute;
-        right: -20px;
-        top: 50%;
-        transform: translateY(-50%);
-        opacity: 0;
-        transition: all 0.3s ease;
-      }
-
-      .login-button:hover::after {
-        right: 10px;
-        opacity: 1;
-      }
-
-      .login-button:hover {
-        background-color: #000;
-        color: #f34994;
-        box-shadow: 0 0 25px #f34994;
+        margin-bottom: 40px;
+        color: #00ffc0; /* Adjusted to green for better contrast */
+        text-shadow: 0 0 5px #00ffc0; /* Stronger text shadow */
       }
       
-      .login-button:active {
-        transform: scale(0.95);
+      /* --- Sleek button design with hover effect --- */
+      /* Targeted the anchor tag from the widget to apply styles correctly */
+      [data-netlify-identity-button] a {
+        padding: 15px 40px;
+        font-size: 1.2em;
+        color: #f34994; /* Button text color */
+        background: transparent;
+        border: 2px solid #f34994; /* Button border color */
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease-in-out;
+        cursor: pointer;
+        text-shadow: 0 0 5px #f34994;
+        box-shadow: 0 0 10px rgba(243, 73, 148, 0.5);
+        text-decoration: none; /* Removed the underline */
+      }
+
+      [data-netlify-identity-button] a:hover {
+        background-color: #f34994;
+        color: #000;
+        box-shadow: 0 0 20px #f34994;
+        transform: scale(1.05);
       }
     </style>
+    <!-- Netlify Identity Widget Script -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
     <div class="login-container">
       <h1>TRADE WITH AROHI</h1>
-      <p>DATA STREAM INITIATED. AUTHORIZATION REQUIRED</p>
-      <div data-netlify-identity-button class="login-button">LOG IN</div>
+      <p>BOT LOADING... AUTHORIZATION REQUIRED</p>
+      <div data-netlify-identity-button></div>
     </div>
   </body>
   <script>
